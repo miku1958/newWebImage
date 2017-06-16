@@ -1,7 +1,7 @@
 platform :ios, ‘8.0’
 target 'newWebImage' do
 	pod "SDWebImage"
-	pod "YYImage"
+	pod "YYWebImage"
 end
 
 		
