@@ -19,26 +19,26 @@
 
 
 @implementation UIImageView (newWebImage)
-- (void)newLoadURL:(NSString*_Nonnull)urlstr{
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr{
 	[self newLoadURL:urlstr placeholder:nil options:0 progress:nil completed:nil];
 }
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder{
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder{
 	[self newLoadURL:urlstr placeholder:placeholder options:0 progress:nil completed:nil];
 }
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options{
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options{
 	[self newLoadURL:urlstr placeholder:placeholder options:options progress:nil completed:nil];
 }
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
 	[self newLoadURL:urlstr placeholder:placeholder options:0 progress:nil completed:completedBlock];
 }
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
 	[self newLoadURL:urlstr placeholder:placeholder options:0 progress:progressBlock completed:completedBlock];
 	
 }
--(void)newLoadURL:(NSString *)urlstr placeholder:(UIImage *)placeholder options:(newWebImageOptions)options completed:(newWebImageDownloaderCompletedBlock)completedBlock{
+-(void)newLoadURL:(NSObject *)urlstr placeholder:(UIImage *)placeholder options:(newWebImageOptions)options completed:(newWebImageDownloaderCompletedBlock)completedBlock{
 	[self newLoadURL:urlstr placeholder:placeholder options:options progress:nil completed:completedBlock];
 }
--(void)newLoadURL:(NSString *)urlstr placeholder:(UIImage *)placeholder options:(newWebImageOptions)options progress:(newWebImageDownloaderProgressBlock)progressBlock completed:(newWebImageDownloaderCompletedBlock)completedBlock{
+-(void)newLoadURL:(NSObject *)urlstr placeholder:(UIImage *)placeholder options:(newWebImageOptions)options progress:(newWebImageDownloaderProgressBlock)progressBlock completed:(newWebImageDownloaderCompletedBlock)completedBlock{
 	__unsafe_unretained typeof(self) weakSelf = self;
 	NSURL* url;
 	if ([urlstr isKindOfClass:[NSString class]]) {
@@ -110,21 +110,21 @@
 	}
 }
 
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
 	[self downloadImageWithURL:url options:0 progress:nil completed:completedBlock];
 }
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
 	[self downloadImageWithURL:url options:0 progress:progressBlock completed:completedBlock];
 }
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 					 options:(newWebImageDownloaderOptions)options
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
 		[self downloadImageWithURL:url options:0 progress:nil completed:completedBlock];
 }
-+ (void)downloadImageWithURL:(nullable NSURL *)urlstr
++ (void)downloadImageWithURL:(nullable NSObject *)urlstr
 					 options:(newWebImageDownloaderOptions)options
 					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{

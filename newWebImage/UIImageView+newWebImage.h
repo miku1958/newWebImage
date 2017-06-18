@@ -103,32 +103,32 @@ typedef void(^newWebImageDownloaderCompletedBlock)(UIImage * _Nullable image, NS
 
 @interface UIImageView (newWebImage)
 /** 仅网络加载图片 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr;
 /** 设置占位图再网络加载图片 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder;
 /** 设置占位图再网络加载图片,带加载参数 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options;
 /** 设置占位图再网络加载图片,并返回下载的图片 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 设置占位图再网络加载图片,并返回下载的图片和返回下载时的过程 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 设置占位图再网络加载图片,并返回下载的图片,带加载参数 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 网络加载图片的完整方法,带加载参数 */
-- (void)newLoadURL:(NSString*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+- (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 仅下载网络图片 */
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 下载网络图片,并返回下载的图片和返回下载时的过程 */
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 下载网络图片,并返回下载的图片,带下载参数 */
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 					 options:(newWebImageDownloaderOptions)options
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 下载网络图片的完整方法,带下载参数 */
-+ (void)downloadImageWithURL:(nullable NSURL *)url
++ (void)downloadImageWithURL:(nullable NSObject *)url
 					 options:(newWebImageDownloaderOptions)options
 					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
