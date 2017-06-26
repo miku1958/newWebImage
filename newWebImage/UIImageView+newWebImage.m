@@ -39,6 +39,8 @@
 	[self newLoadURL:urlstr placeholder:placeholder options:options progress:nil completed:completedBlock];
 }
 -(void)newLoadURL:(NSObject *)urlstr placeholder:(UIImage *)placeholder options:(newWebImageOptions)options progress:(newWebImageDownloaderProgressBlock)progressBlock completed:(newWebImageDownloaderCompletedBlock)completedBlock{
+
+	
 	__unsafe_unretained typeof(self) weakSelf = self;
 	NSURL* url;
 	if ([urlstr isKindOfClass:[NSString class]]) {
@@ -46,10 +48,15 @@
 	}else if([urlstr isKindOfClass:[NSURL class]]){
 		url = (NSURL*)urlstr;
 		urlstr = url.absoluteString;
+
 	}else{
+		[self setImage:placeholder];
 		return;
 	}
-	
+	if (((NSString*)urlstr).length<7) {//http://
+		[self setImage:placeholder];
+		return;
+	}
 	UIImage *tempImage = [SDImageCache.sharedImageCache imageFromCacheForKey:urlstr];
 	
 	if (tempImage) {
