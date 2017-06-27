@@ -98,7 +98,7 @@ typedef NS_OPTIONS(NSUInteger, newWebImageDownloaderOptions) {
 	newWebImageDownloaderScaleDownLargeImages = 1 << 8,
 };
 typedef void(^newWebImageDownloaderProgressBlock)(NSInteger receivedSize, NSInteger totalSize);
-typedef void(^newWebImageDownloaderCompletedBlock)(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error);
+typedef void(^newWebImageDownloaderCompletedBlock)(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error,UIImage **replaceSaveingImage);
 
 
 @interface UIImageView (newWebImage)
@@ -116,22 +116,28 @@ typedef void(^newWebImageDownloaderCompletedBlock)(UIImage * _Nullable image, NS
 - (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 网络加载图片的完整方法,带加载参数 */
 - (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+
+
+@end
+
+@interface UIImage (newWebImage)
++(UIImage *)loadImageCacheWithURL:(nullable NSObject *)url;
 /** 仅下载网络图片 */
 + (void)downloadImageWithURL:(nullable NSObject *)url
-				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 下载网络图片,并返回下载的图片和返回下载时的过程 */
 + (void)downloadImageWithURL:(nullable NSObject *)url
-					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
-				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
+completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 下载网络图片,并返回下载的图片,带下载参数 */
 + (void)downloadImageWithURL:(nullable NSObject *)url
-					 options:(newWebImageDownloaderOptions)options
-				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+options:(newWebImageDownloaderOptions)options
+completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 /** 下载网络图片的完整方法,带下载参数 */
 + (void)downloadImageWithURL:(nullable NSObject *)url
-					 options:(newWebImageDownloaderOptions)options
-					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
-				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
+options:(newWebImageDownloaderOptions)options
+progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
+completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 
 /** 清除磁盘缓存 */
 + (void)clearDiskOnCompletion:(void (^_Nullable)(CGFloat clearCacheSize))completionBlock;
@@ -139,6 +145,4 @@ typedef void(^newWebImageDownloaderCompletedBlock)(UIImage * _Nullable image, NS
 + (void)clearMemoryOnCompletion:(void (^_Nullable)(CGFloat clearMemorySize))completionBlock;
 /** 清除磁盘和内存缓存 */
 + (void)clearCacheOnCompletion:(void (^_Nullable)(CGFloat clearCacheSize,CGFloat clearMemorySize))completionBlock;
-
 @end
-

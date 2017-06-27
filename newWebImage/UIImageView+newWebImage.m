@@ -92,10 +92,17 @@
 		} completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
 			[weakSelf setImage:image];
 			[weakSelf fitSize];
-			[SDImageCache.sharedImageCache storeImageDataToDisk:data forKey:urlstr];
+			UIImage *replace = nil;
 			if(completedBlock){
-				completedBlock(image,data,error);
+				completedBlock(image,data,error,&replace);
 			}
+			if (replace) {
+				NSData *newData = UIImagePNGRepresentation(replace);
+				[SDImageCache.sharedImageCache storeImageDataToDisk:newData forKey:urlstr];
+			}else{
+				[SDImageCache.sharedImageCache storeImageDataToDisk:data forKey:urlstr];
+			}
+
 		}];
 	}else{
 		[self sd_setImageWithURL:url placeholderImage:placeholder options:tempOptions progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
@@ -105,7 +112,7 @@
 		} completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
 			[weakSelf fitSize];
 			if(completedBlock){
-				completedBlock(image,nil,error);
+				completedBlock(image,nil,error,nil);
 			}
 		}];
 	}
@@ -117,6 +124,30 @@
 	}
 }
 
+
+@end
+
+@implementation UIImage (newWebImage)
++(UIImage *)loadImageCacheWithURL:(NSObject *)urlstr{
+
+	if([urlstr isKindOfClass:[NSURL class]]){
+		urlstr = ((NSURL *)urlstr).absoluteString;
+	}
+	
+	if (((NSString*)urlstr).length<7) {//http://
+		return nil;
+	}
+	
+	if ([urlstr isKindOfClass:[NSString class]]) {
+		return [SDImageCache.sharedImageCache imageFromCacheForKey:urlstr];
+	}else{
+		return nil;
+	}
+	
+
+
+
+}
 + (void)downloadImageWithURL:(nullable NSObject *)url
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
 	[self downloadImageWithURL:url options:0 progress:nil completed:completedBlock];
@@ -129,13 +160,13 @@
 + (void)downloadImageWithURL:(nullable NSObject *)url
 					 options:(newWebImageDownloaderOptions)options
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
-		[self downloadImageWithURL:url options:0 progress:nil completed:completedBlock];
+	[self downloadImageWithURL:url options:0 progress:nil completed:completedBlock];
 }
 + (void)downloadImageWithURL:(nullable NSObject *)urlstr
 					 options:(newWebImageDownloaderOptions)options
 					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
-
+	
 	NSURL* url;
 	if ([urlstr isKindOfClass:[NSString class]]) {
 		url = URL(urlstr);
@@ -165,8 +196,15 @@
 			progressBlock(receivedSize,expectedSize);
 		}
 	} completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+		UIImage *replace = nil;
 		if (completedBlock) {
-			completedBlock(image,data,error);
+			completedBlock(image,data,error,&replace);
+		}
+		if (replace) {
+			NSData *newData = UIImagePNGRepresentation(replace);
+			[SDImageCache.sharedImageCache storeImageDataToDisk:newData forKey:urlstr];
+		}else{
+			[SDImageCache.sharedImageCache storeImageDataToDisk:data forKey:urlstr];
 		}
 	}];
 }
@@ -193,14 +231,14 @@
 + (void)clearMemoryOnCompletion:(void (^)(CGFloat))completionBlock{
 	SDImageCache *cache = [SDImageCache sharedImageCache];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-			[cache clearMemory];
+		[cache clearMemory];
 		if (completionBlock) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				completionBlock(0);
 			});
 		}
 	});
-
+	
 }
 /** 清除磁盘和内存缓存 */
 + (void)clearCacheOnCompletion:(void (^)(CGFloat clearCacheSize,CGFloat clearMemorySize))completionBlock{
@@ -212,7 +250,7 @@
 		[cache clearMemory];
 		[fileManager removeItemAtPath:cachePath error:nil];
 		[fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:NULL];
-
+		
 		if (completionBlock) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				completionBlock(size,0);
@@ -221,4 +259,3 @@
 	});
 }
 @end
-
