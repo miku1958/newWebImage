@@ -7,11 +7,16 @@
 //
 
 #import "UIImageView+newWebImage.h"
+
+
+#if __has_include("SDImageCache.h")
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
-
+#import "UIView+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImageDownloader.h"
+#define use_SDWebImage 1
+#endif
 
 #pragma mark - URL相关
 //用NSString返回一个URL
@@ -105,6 +110,7 @@
 
 		}];
 	}else{
+        
 		[self sd_setImageWithURL:url placeholderImage:placeholder options:tempOptions progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
 			if(progressBlock){
 				progressBlock(receivedSize, expectedSize);
@@ -124,6 +130,9 @@
 	}
 }
 
+-(NSURL *)newImageURL{
+    return self.sd_imageURL;
+}
 
 @end
 
@@ -139,7 +148,7 @@
 	}
 	
 	if ([urlstr isKindOfClass:[NSString class]]) {
-		return [SDImageCache.sharedImageCache imageFromCacheForKey:urlstr];
+		return [SDImageCache.sharedImageCache imageFromCacheForKey:(NSString*)urlstr];
 	}else{
 		return nil;
 	}
@@ -166,7 +175,13 @@
 					 options:(newWebImageDownloaderOptions)options
 					progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 				   completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock{
-	
+    
+    UIImage *largeImage = [UIImage loadImageCacheWithURL:urlstr];
+    if (largeImage) {
+        completedBlock(largeImage,nil,nil,nil);
+        return;
+    }
+    
 	NSURL* url;
 	if ([urlstr isKindOfClass:[NSString class]]) {
 		url = URL(urlstr);
@@ -176,6 +191,7 @@
 	}else{
 		return;
 	}
+
 	SDWebImageDownloaderOptions tempOptions = 0;
 	if (options) {
 		if (options & newWebImageDownloaderLowPriority) tempOptions |= SDWebImageDownloaderLowPriority;
@@ -191,12 +207,15 @@
 		tempOptions=SDWebImageDownloaderLowPriority;
 	}
 	
-	[SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:tempOptions progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+	[SDWebImageDownloader.sharedDownloader downloadImageWithURL:url options:tempOptions progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * targetURL) {
 		if (progressBlock) {
-			progressBlock(receivedSize,expectedSize);
+            progressBlock(receivedSize,expectedSize);
 		}
-	} completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+	} completed:^(UIImage * image, NSData * data, NSError * error, BOOL finished) {
 		UIImage *replace = nil;
+        if (!data) {
+            return ;
+        }
 		if (completedBlock) {
 			completedBlock(image,data,error,&replace);
 		}
@@ -257,5 +276,13 @@
 			});
 		}
 	});
+}
+
++ (UIImage *)newImageFromDiskCacheForKey:(NSString *)key{
+    return [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:key];
+}
+
++ (void)cancelAllDownload{
+    [SDWebImageManager.sharedManager cancelAll];
 }
 @end

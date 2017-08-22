@@ -117,7 +117,7 @@ typedef void(^newWebImageDownloaderCompletedBlock)(UIImage * _Nullable image, NS
 /** 网络加载图片的完整方法,带加载参数 */
 - (void)newLoadURL:(NSObject*_Nonnull)urlstr placeholder:(UIImage*_Nullable)placeholder options:(newWebImageOptions)options progress:(nullable newWebImageDownloaderProgressBlock)progressBlock completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 
-
+@property (nonatomic,readonly)NSURL * _Nullable newImageURL;
 @end
 
 @interface UIImage (newWebImage)
@@ -139,10 +139,16 @@ options:(newWebImageDownloaderOptions)options
 progress:(nullable newWebImageDownloaderProgressBlock)progressBlock
 completed:(nullable newWebImageDownloaderCompletedBlock)completedBlock;
 
+
+
 /** 清除磁盘缓存 */
 + (void)clearDiskOnCompletion:(void (^_Nullable)(CGFloat clearCacheSize))completionBlock;
 /** 清除内存缓存 */
 + (void)clearMemoryOnCompletion:(void (^_Nullable)(CGFloat clearMemorySize))completionBlock;
 /** 清除磁盘和内存缓存 */
 + (void)clearCacheOnCompletion:(void (^_Nullable)(CGFloat clearCacheSize,CGFloat clearMemorySize))completionBlock;
+
++ (nullable UIImage *)newImageFromDiskCacheForKey:(nullable NSString *)key;
+
++ (void)cancelAllDownload;
 @end
