@@ -16,7 +16,7 @@
 		3071DE911EE685AB00AB5486 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3071DE8F1EE685AB00AB5486 /* LaunchScreen.storyboard */; };
 		3071DE9C1EE685AB00AB5486 /* newWebImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3071DE9B1EE685AB00AB5486 /* newWebImageTests.m */; };
 		3071DEA71EE685AB00AB5486 /* newWebImageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3071DEA61EE685AB00AB5486 /* newWebImageUITests.m */; };
-		3071DEB61EE68D4000AB5486 /* UIImageView+newWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3071DEB51EE68D4000AB5486 /* UIImageView+newWebImage.m */; };
+		FF60A46C1F4D6EBC00C2507B /* newWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FF60A46B1F4D6EBC00C2507B /* newWebImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,12 +53,12 @@
 		3071DEA21EE685AB00AB5486 /* newWebImageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = newWebImageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3071DEA61EE685AB00AB5486 /* newWebImageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = newWebImageUITests.m; sourceTree = "<group>"; };
 		3071DEA81EE685AB00AB5486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3071DEB41EE68D4000AB5486 /* UIImageView+newWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+newWebImage.h"; sourceTree = "<group>"; };
-		3071DEB51EE68D4000AB5486 /* UIImageView+newWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+newWebImage.m"; sourceTree = "<group>"; };
 		5911648FD794A0BB0BA72F63 /* libPods-newWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newWebImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCF2B36D3135C49B2820984 /* Pods-newWebImage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newWebImage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newWebImage/Pods-newWebImage.debug.xcconfig"; sourceTree = "<group>"; };
 		B1948BEFA26B4E9AC09F2C45 /* Pods-newWebImage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newWebImage.release.xcconfig"; path = "Pods/Target Support Files/Pods-newWebImage/Pods-newWebImage.release.xcconfig"; sourceTree = "<group>"; };
 		C894747586DC4834B3DE2BA9 /* libPods-newWebImageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newWebImageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF60A46A1F4D6EBC00C2507B /* newWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newWebImage.h; sourceTree = "<group>"; };
+		FF60A46B1F4D6EBC00C2507B /* newWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newWebImage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +121,7 @@
 		3071DE801EE685AB00AB5486 /* newWebImage */ = {
 			isa = PBXGroup;
 			children = (
+				FF60A4691F4D6EBC00C2507B /* UI+newWebImage */,
 				3071DE841EE685AB00AB5486 /* AppDelegate.h */,
 				3071DE851EE685AB00AB5486 /* AppDelegate.m */,
 				3071DE871EE685AB00AB5486 /* ViewController.h */,
@@ -130,8 +131,6 @@
 				3071DE8F1EE685AB00AB5486 /* LaunchScreen.storyboard */,
 				3071DE921EE685AB00AB5486 /* Info.plist */,
 				3071DE811EE685AB00AB5486 /* Supporting Files */,
-				3071DEB41EE68D4000AB5486 /* UIImageView+newWebImage.h */,
-				3071DEB51EE68D4000AB5486 /* UIImageView+newWebImage.m */,
 			);
 			path = newWebImage;
 			sourceTree = "<group>";
@@ -169,6 +168,15 @@
 				B1948BEFA26B4E9AC09F2C45 /* Pods-newWebImage.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FF60A4691F4D6EBC00C2507B /* UI+newWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				FF60A46A1F4D6EBC00C2507B /* newWebImage.h */,
+				FF60A46B1F4D6EBC00C2507B /* newWebImage.m */,
+			);
+			path = "UI+newWebImage";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,8 +366,8 @@
 			files = (
 				3071DE891EE685AB00AB5486 /* ViewController.m in Sources */,
 				3071DE861EE685AB00AB5486 /* AppDelegate.m in Sources */,
-				3071DEB61EE68D4000AB5486 /* UIImageView+newWebImage.m in Sources */,
 				3071DE831EE685AB00AB5486 /* main.m in Sources */,
+				FF60A46C1F4D6EBC00C2507B /* newWebImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
