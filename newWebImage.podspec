@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/miku1958/newWebImage.git", :tag => s.version}
+  s.source       = { :git => "https://github.com/miku1958/newWebImage.git", :commit => d379f00df232e709c479df51b3aa35d3cfdbd069}
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "newWebImage/UI+newWebImage/*.{h,m}"
+  s.source_files  = "newWebImage/Pods/../*.{h,m}","newWebImage/UI+newWebImage/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
