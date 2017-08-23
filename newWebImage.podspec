@@ -94,7 +94,7 @@ Pod::Spec.new do |s|
   s.source_files  = "newWebImage/UI+newWebImage/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
 
-  s.public_header_files = "newWebImage//Pods/Headers/Public/*.h"
+  # s.public_header_files = "newWebImage//Pods/Headers/Public/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -118,7 +118,8 @@ Pod::Spec.new do |s|
   #
 
   # s.framework  = "SomeFramework"
-  # s.frameworks = "SomeFramework", "AnotherFramework"
+  # s.frameworks = "SDWebImage"
+  # , "YYWebImage"
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
