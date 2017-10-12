@@ -6,7 +6,7 @@
 //  Copyright © 2017年 庄黛淳华. All rights reserved.
 //
 
-#import "UIImageView+newWebImage.h"
+#import "newWebImage.h"
 
 
 #if __has_include("SDImageCache.h")
