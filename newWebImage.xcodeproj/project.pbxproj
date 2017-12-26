@@ -249,7 +249,7 @@
 				TargetAttributes = {
 					3071DE7D1EE685AB00AB5486 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = BMGUDH6HBQ;
+						DevelopmentTeam = 3AP6XM8L72;
 						ProvisioningStyle = Automatic;
 					};
 					3071DE961EE685AB00AB5486 = {
@@ -520,7 +520,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BMGUDH6HBQ;
+				DEVELOPMENT_TEAM = 3AP6XM8L72;
 				INFOPLIST_FILE = newWebImage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -536,7 +536,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BMGUDH6HBQ;
+				DEVELOPMENT_TEAM = 3AP6XM8L72;
 				INFOPLIST_FILE = newWebImage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
